@@ -34,7 +34,7 @@ export const createClient = (): AxiosInstance => {
     withCredentials: true,
     baseURL: config.apiBaseUrl,
     headers: {
-      'X-XSRF-TOKEN': 1,
+      'X-XSRF-TOKEN': '1',
     },
   })
 

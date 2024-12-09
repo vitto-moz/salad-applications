@@ -11,7 +11,7 @@ interface Props extends DemandMonitorPageProps {
 export const _DemandMonitorPageContainer: FC<Props> = ({ isAuthenticated, ...props }: Props) => {
   const featureManager = useFeatureManager()
   const isDemandNotificationsFeatureFlagEnabled = featureManager.isEnabled(FeatureFlags.DemandNotifications)
-  const withGetNotifiedButton = isDemandNotificationsFeatureFlagEnabled && !isAuthenticated
+  const withGetNotifiedButton = isDemandNotificationsFeatureFlagEnabled && isAuthenticated
 
   return <DemandMonitorPage {...props} withGetNotifiedButton={withGetNotifiedButton} />
 }

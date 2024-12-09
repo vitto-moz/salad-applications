@@ -11,7 +11,7 @@ import type { DemandedHardwarePerformance } from '../DemandMonitorStore'
 import { DemandMonitorFAQ } from './DemandMonitorFAQ'
 import { DemandMonitorTable } from './DemandMonitorTable'
 import { oneHourInMilliseconds } from './DemandMonitorTable/constants'
-import { GetNotifiedDemandChangesModal } from './GetNotifiedDemandChangesModal/GetNotifiedDemandChangesModal'
+import { SubscriptionDemandChangesModal } from './SubscriptionDemandChangesModal/SubscriptionDemandChangesModal'
 
 const styles: (theme: SaladTheme) => Record<string, CSS.Properties> = (theme: SaladTheme) => ({
   pageWrapper: {
@@ -81,6 +81,8 @@ const _DemandMonitorPage: FunctionComponent<Props> = ({
 
   const updateTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+  console.log('onLoginClick ===> ', onLoginClick)
+
   useEffect(() => {
     fetchDemandedHardwarePerformanceList()
     updateTimerRef.current = setInterval(fetchDemandedHardwarePerformanceList, oneHourInMilliseconds)
@@ -96,9 +98,9 @@ const _DemandMonitorPage: FunctionComponent<Props> = ({
     setIsModalShown(false)
   }
 
-  const handleModalContinueClick = () => {
-    setIsModalShown(false)
-  }
+  // const handleModalContinueClick = () => {
+  //   setIsModalShown(false)
+  // }
 
   const handleGetNotifiedButtonClick = () => {
     setIsModalShown(true)
@@ -133,14 +135,15 @@ const _DemandMonitorPage: FunctionComponent<Props> = ({
             <DemandMonitorFAQ />
           </div>
         </div>
-        {isModalShown && (
+        {/* {isModalShown && (
           <GetNotifiedDemandChangesModal
             onLoginClick={onLoginClick}
             onCloseClick={handleModalCloseClick}
             onContinuesClick={handleModalContinueClick}
             demandedHardwarePerformanceList={demandedHardwarePerformanceList}
           />
-        )}
+        )} */}
+        {isModalShown && <SubscriptionDemandChangesModal onCloseClick={handleModalCloseClick} />}
       </div>
     )
   }
